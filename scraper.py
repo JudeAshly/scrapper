@@ -55,7 +55,25 @@ for url in new:
     tam.append(cont)
     titl.append(BeautifulSoup(str(tit)).get_text())
 
+newsdaily=[]
+titl=[]
 
+domain=['https://www.newsday.com/long-island/suffolk/brookhaven-calabro-airport-solar-panels-1.29902154','https://www.newsday.com/long-island/obituaries/kim-hardwick-clayton-huey-principal-obituary-1.29909256',
+       'https://www.newsday.com/long-island/suffolk/riverhead-luminati-legal-issues-1.29910315','https://www.newsday.com/sports/columnists/neil-best/islanders-penguins-sweep-1.29896366',
+       'https://www.newsday.com/long-island/suffolk/patchogue-civil-war-statue-returning-1.29879558','https://www.newsday.com/sports/baseball/yankees/yankees-red-sox-james-paxton-1.29893124',
+       'https://www.newsday.com/entertainment/movies/many-saints-of-newark-garden-city-1.29884079']
+for dom in domain:
+    reqs=requests.get(dom)
+    soup=BeautifulSoup(reqs.content,'html5lib')
+    con=soup.findAll('div',attrs={'id':'contentAccess'})
+    tat=soup.findAll('h1')
+    cons=BeautifulSoup(str(con))
+    s= cons.findAll('p')
+    c=BeautifulSoup(str(s[:-3])).get_text()
+    c=c.replace('[','')
+    c=c.replace(']','')
+    newsdaily.append(c)
+    titl.append(BeautifulSoup(str(tat)).get_text())
 
 
 az=[]
